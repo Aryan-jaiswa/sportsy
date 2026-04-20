@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Animation system globals                                           */
+/* ------------------------------------------------------------------ */
+
+/* GPU-promote animated elements before animation starts */
+[data-page-enter],
+[data-page-exit] {
+  will-change: transform, opacity;
+}
+
+/* Scroll-reveal elements start hidden; the IntersectionObserver hook
+   sets opacity/transform inline before observing. This rule is a
+   fallback so there's no flash-of-unstyled-content.                  */
+[data-scroll-reveal] {
+  will-change: transform, opacity;
+}
+
+/* Slim top progress bar (NProgress-style) */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  will-change: width, opacity;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+/* Gate ALL pointer events while a page transition is running */
+[data-transitioning='true'] {
+  pointer-events: none;
+}
